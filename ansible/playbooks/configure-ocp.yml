@@ -1,9 +1,0 @@
----
-- hosts: localhost
-  any_errors_fatal: true
-  vars:
-    cluster_type: aws
-    cluster_name: "{{ lookup('env', 'CLUSTER_NAME') | default('', True) }}"
-  roles:
-    - ocp_setup_mas_deps
-    
