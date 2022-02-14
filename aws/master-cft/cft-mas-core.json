@@ -715,7 +715,7 @@
                             [
                                 "#!/bin/bash\n",
                                 "# Initiate the provisioning process\n",
-                                "ssh-keyscan github.ibm.com >> ~/.ssh/known_hosts;",
+                                "ssh-keyscan github.com >> ~/.ssh/known_hosts;",
                                 "cd /root;",
                                 "git clone -b dev https://github.com/ibm-mas/mas-on-aws.git;",
                                 "cd mas-on-aws;",
