@@ -244,6 +244,7 @@ if [[ $PRE_VALIDATION == "pass" ]]; then
   cd $CLOUD_TYPE
   ./deploy.sh
   retcode=$?
+  log "Deployment return code is $retcode"
   if [[ $retcode -eq 0 ]]; then
     log "Deployment successful"
     log "===== PROVISIONING COMPLETED ====="

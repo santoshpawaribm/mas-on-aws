@@ -88,23 +88,23 @@ mark_provisioning_failed() {
   RESP_CODE=1
   export STATUS=FAILURE
   export STATUS_MSG=NA
-  if [[ $retcode -eq 1 ]]; then
+  if [[ $retcode -eq 11 ]]; then
     export STATUS_MSG="This region is not supported for MAS deployment."
-  elif [[ $retcode -eq 2 ]]; then
+  elif [[ $retcode -eq 12 ]]; then
     export STATUS_MSG="The provided ER key is not valid. It does not have access to download the MAS images."
-  elif [[ $retcode -eq 3 ]]; then
+  elif [[ $retcode -eq 13 ]]; then
     export STATUS_MSG="The provided Hosted zone is not a public hosted zone. Please provide a public hosted zone."
-  elif [[ $retcode -eq 4 ]]; then
+  elif [[ $retcode -eq 14 ]]; then
     export STATUS_MSG="The provided JDBC details are not valid. Could not connect to the database using provided inputs."
-  elif [[ $retcode -eq 5 ]]; then
+  elif [[ $retcode -eq 15 ]]; then
     export STATUS_MSG="Please provide all the inputs to use existing SLS."
-  elif [[ $retcode -eq 6 ]]; then
+  elif [[ $retcode -eq 16 ]]; then
     export STATUS_MSG="Please provide all the inputs to use existing BAS."
-  elif [[ $retcode -eq 7 ]]; then
+  elif [[ $retcode -eq 17 ]]; then
     export STATUS_MSG="Please provide OCP pull secret."
-  elif [[ $retcode -eq 8 ]]; then
+  elif [[ $retcode -eq 18 ]]; then
     export STATUS_MSG="Please provide MAS license URL."
-  elif [[ $retcode -eq 9 ]]; then
+  elif [[ $retcode -eq 19 ]]; then
     export STATUS_MSG="Please provide all the inputs to use existing OCP."
   elif [[ $retcode -eq 21 ]]; then
     export STATUS_MSG="Failure in creating OCP cluster."

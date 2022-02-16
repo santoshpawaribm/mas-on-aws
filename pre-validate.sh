@@ -11,7 +11,7 @@ if [[ ${SUPPORTED_REGIONS,,} =~ $DEPLOY_REGION ]]; then
   log "Supported region = PASS"
 else
    log "ERROR: Supported region = FAIL"
-   SCRIPT_STATUS=1
+   SCRIPT_STATUS=11
 fi
 
 # Check if ER key is valid
@@ -20,7 +20,7 @@ if [ $? -eq 0 ]; then
    log "ER key verification = PASS"
 else
    log "ERROR: ER key verification = FAIL"
-   SCRIPT_STATUS=2
+   SCRIPT_STATUS=12
 fi
 
 # Check if provided hosted zone is public
@@ -33,7 +33,7 @@ if [ $? -eq 0 ]; then
    log "MAS public domain verification = PASS"
 else
    log "ERROR: MAS public domain verification = FAIL"
-   SCRIPT_STATUS=3
+   SCRIPT_STATUS=13
 fi
 
 # JDBC CFT inputs validation and  connection test
@@ -44,19 +44,19 @@ else
     if [ -z "$MAS_JDBC_USER" ] 
     then 
         log "ERROR: Database username is not specified"
-        SCRIPT_STATUS=4
+        SCRIPT_STATUS=14
     elif [ -z "$MAS_JDBC_PASSWORD" ] 
     then 
         log "ERROR: Database password is not specified"
-        SCRIPT_STATUS=4
+        SCRIPT_STATUS=14
     elif [ -z "$MAS_JDBC_URL" ] 
     then
         log "ERROR: Database connection url is not specified"
-        SCRIPT_STATUS=4
+        SCRIPT_STATUS=14
     elif [ -z "$MAS_JDBC_CERT_URL" ] 
     then
         log "ERROR: Database certificate url is not specified"
-        SCRIPT_STATUS=4
+        SCRIPT_STATUS=14
     else         
         log "Downloading DB certificate"
         cd $GIT_REPO_HOME
@@ -93,15 +93,15 @@ else
     if [ -z "$SLS_ENDPOINT_URL" ] 
     then 
         log "ERROR: SLS Endpoint URL is not specified"
-        SCRIPT_STATUS=5
+        SCRIPT_STATUS=15
     elif [ -z "$SLS_REGISTRATION_KEY" ] 
     then 
         log "ERROR: SLS Registration Key is not specified"
-        SCRIPT_STATUS=5
+        SCRIPT_STATUS=15
     elif [ -z "$SLS_PUB_CERT_URL" ] 
     then
         log "ERROR: SLS Public Cerificate URL is not specified"
-        SCRIPT_STATUS=5
+        SCRIPT_STATUS=15
     else         
         log "=== Using existing SLS deployment inputs ==="
     fi
@@ -115,15 +115,15 @@ else
     if [ -z "$BAS_API_KEY" ] 
     then 
         log "ERROR: BAS API Key is not specified"
-        SCRIPT_STATUS=6
+        SCRIPT_STATUS=16
     elif [ -z "$BAS_ENDPOINT_URL" ] 
     then 
         log "ERROR: BAS Endpoint URL is not specified"
-        SCRIPT_STATUS=6
+        SCRIPT_STATUS=16
     elif [ -z "$BAS_PUB_CERT_URL" ] 
     then
         log "ERROR: BAS Public Cerificate URL is not specified"
-        SCRIPT_STATUS=6
+        SCRIPT_STATUS=16
     else         
         log "=== Using existing BAS deployment inputs ==="
     fi
@@ -135,21 +135,21 @@ then
     log "=== New OCP Cluster and associated user and password will be deployed ==="
     if [[ -z $OCP_PULL_SECRET ]]; then
         log "ERROR: OpenShift pull secret is required for OCP cluster deployment"
-        SCRIPT_STATUS=7
+        SCRIPT_STATUS=17
     fi
 else
     if [ -z "$EXS_OCP_URL" ] 
     then 
         log "ERROR: Existing OCP Cluster URL is not specified"
-        SCRIPT_STATUS=9
+        SCRIPT_STATUS=19
     elif [ -z "$EXS_OCP_USER" ] 
     then 
         log "ERROR: Existing OCP Cluster user is not specified"
-        SCRIPT_STATUS=9
+        SCRIPT_STATUS=19
     elif [ -z "$EXS_OCP_PWD" ] 
     then
         log "ERROR: Existing OCP Cluster password is not specified"
-        SCRIPT_STATUS=9
+        SCRIPT_STATUS=19
     else         
         log "=== Using existing OCP deployment inputs ==="
     fi
@@ -158,7 +158,7 @@ fi
 # Check if MAS license is provided
 if [[ -z $MAS_LICENSE_URL ]]; then
     log "ERROR: MAS license is reqiuired for MAS deployment"
-    SCRIPT_STATUS=8
+    SCRIPT_STATUS=18
 fi
 
 exit $SCRIPT_STATUS
