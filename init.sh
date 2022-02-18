@@ -92,9 +92,7 @@ export BAS_CONTACT_FIRSTNAME=Bas
 export BAS_CONTACT_LASTNAME=Support
 export GRAPHANA_PASSWORD=password
 # MAS variables
-#export MAS_ENTITLEMENT_KEY=$SLS_ENTITLEMENT_KEY
 # CP4D variables
-#export CPD_ENTITLEMENT_KEY=$SLS_ENTITLEMENT_KEY
 export CPD_STORAGE_CLASS=ocs-storagecluster-cephfs
 export CPD_NAMESPACE="cpd-meta-ops-${RANDOM_STR}"
 # Manage variables
@@ -235,7 +233,8 @@ if [[ $PRE_VALIDATION == "pass" ]]; then
   log " OPENSHIFT_USER_PROVIDE=$OPENSHIFT_USER_PROVIDE"
 
   # Create Red Hat pull secret
-  echo "$OCP_PULL_SECRET" > $GIT_REPO_HOME/pull-secret.json
+  echo "$OCP_PULL_SECRET" > $OPENSHIFT_PULL_SECRET_FILE_PATH
+  chmod 600 $OPENSHIFT_PULL_SECRET_FILE_PATH
 
   # Call cloud specific script
   chmod +x $CLOUD_TYPE/*.sh

@@ -44,6 +44,9 @@ if [[ ${MAS_LICENSE_URL,,} =~ ^https? ]]; then
 elif [[ ${MAS_LICENSE_URL,,} =~ ^s3 ]]; then
   aws s3 cp "$MAS_LICENSE_URL" entitlement.lic
 fi
+if [[ -f entitlement.lic ]]; then
+  chmod 600 entitlement.lic
+fi
 # Download SLS certificate
 cd $GIT_REPO_HOME
 if [[ ${SLS_PUB_CERT_URL,,} =~ ^https? ]]; then
@@ -53,6 +56,9 @@ elif [[ ${SLS_PUB_CERT_URL,,} =~ ^s3 ]]; then
   log "Downloading SLS certificate from S3 URL"
   aws s3 cp "$SLS_PUB_CERT_URL" sls.crt
 fi
+if [[ -f sls.crt ]]; then
+  chmod 600 sls.crt
+fi
 # Download BAS certificate
 cd $GIT_REPO_HOME
 if [[ ${BAS_PUB_CERT_URL,,} =~ ^https? ]]; then
@@ -61,6 +67,9 @@ if [[ ${BAS_PUB_CERT_URL,,} =~ ^https? ]]; then
 elif [[ ${BAS_PUB_CERT_URL,,} =~ ^s3 ]]; then
   log "Downloading BAS certificate from S3 URL"
   aws s3 cp "$BAS_PUB_CERT_URL" bas.crt
+fi
+if [[ -f bas.crt ]]; then
+  chmod 600 bas.crt
 fi
 
 ### Read License File & Retrive SLS hostname and host id
