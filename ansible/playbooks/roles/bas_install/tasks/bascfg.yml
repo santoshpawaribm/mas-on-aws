@@ -9,7 +9,7 @@
     kind: Route
     name: bas-endpoint
     namespace: "{{ bas_namespace }}"
-  register: _bas_endpoint
+  register: bas_endpoint
 
 
 - name: Lookup bas-api-key
@@ -18,7 +18,7 @@
     kind: Secret
     name: bas-api-key
     namespace: "{{ bas_namespace }}"
-  register: _bas_apiKey_result
+  register: bas_apikey_result
 
 # - name: Lookup BAS segment key
 #   k8s_info:
@@ -26,7 +26,7 @@
 #     kind: Secret
 #     name: segment-key-secret
 #     namespace: "{{ bas_namespace }}"
-#   register: _bas_segmentKey_result
+#   register: bas_segment_key_result
 
 
 - name: Lookup Certificate for BAS
@@ -35,14 +35,14 @@
     kind: Secret
     name: router-ca
     namespace: openshift-ingress-operator
-  register: _bas_certificates_result
+  register: bas_certificates_result
 
 - name: Set facts for BASCfg
   set_fact:
-    # bas_segment_key: "{{_bas_segmentKey_result.resources[0].data.segmentkey | b64decode}}"
-    bas_api_key: "{{_bas_apiKey_result.resources[0].data.apikey | b64decode }}"
-    bas_endpoint_url: "https://{{_bas_endpoint.resources[0].spec.host}}"
-    bas_tls_crt: "{{_bas_certificates_result.resources[0].data['tls.crt'] | b64decode }}"
+    # bas_segment_key: "{{bas_segment_key_result.resources[0].data.segmentkey | b64decode}}"
+    bas_api_key: "{{bas_apikey_result.resources[0].data.apikey | b64decode }}"
+    bas_endpoint_url: "https://{{bas_endpoint.resources[0].spec.host}}"
+    bas_tls_crt: "{{bas_certificates_result.resources[0].data['tls.crt'] | b64decode }}"
 
 
 # 2. Write out the config to the local filesystem

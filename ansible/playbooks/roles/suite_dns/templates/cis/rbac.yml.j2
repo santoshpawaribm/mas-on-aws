@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: "cert-manager-webhook-ibm-cis"
-  namespace: "{{ certManager.namespace }}"
+  namespace: "{{ cert_manager.namespace }}"
   labels:
     app: "cert-manager-webhook-ibm-cis"
 ---
@@ -12,7 +12,7 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding
 metadata:
-  namespace: "{{ certManager.namespace }}"
+  namespace: "{{ cert_manager.namespace }}"
   name: "cert-manager-webhook-ibm-cis"
   labels:
     app: "cert-manager-webhook-ibm-cis"
@@ -24,14 +24,14 @@ subjects:
   - apiGroup: ""
     kind: ServiceAccount
     name: "cert-manager-webhook-ibm-cis"
-    namespace: {{ certManager.namespace }}
+    namespace: {{ cert_manager.namespace }}
 ---
 # Grant cert-manager permission to validate using our apiserver
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: Role
 metadata:
   name: "cert-manager-webhook-ibm-cis"
-  namespace: "{{ certManager.namespace }}"
+  namespace: "{{ cert_manager.namespace }}"
   labels:
     app: "cert-manager-webhook-ibm-cis"
 rules:
@@ -60,7 +60,7 @@ subjects:
   - apiGroup: ""
     kind: ServiceAccount
     name: "cert-manager-webhook-ibm-cis"
-    namespace: "{{ certManager.namespace }}"
+    namespace: "{{ cert_manager.namespace }}"
 ---
 # apiserver gets the auth-delegator role to delegate auth decisions to
 # the core apiserver
@@ -78,7 +78,7 @@ subjects:
   - apiGroup: ""
     kind: ServiceAccount
     name: "cert-manager-webhook-ibm-cis"
-    namespace: "{{ certManager.namespace }}"
+    namespace: "{{ cert_manager.namespace }}"
 ---
 # Grant cert-manager permission to validate using our apiserver
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -89,7 +89,7 @@ metadata:
     app: "cert-manager-webhook-ibm-cis"
 rules:
   - apiGroups:
-      - "{{ groupName }}"
+      - "{{ group_name }}"
     resources:
       - '*'
     verbs:
@@ -108,5 +108,5 @@ roleRef:
 subjects:
   - apiGroup: ""
     kind: ServiceAccount
-    name: "{{ certManager.serviceAccountName }}"
-    namespace: "{{ certManager.namespace }}"
+    name: "{{ cert_manager.serviceAccountName }}"
+    namespace: "{{ cert_manager.namespace }}"

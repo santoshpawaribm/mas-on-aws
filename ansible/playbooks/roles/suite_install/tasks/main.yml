@@ -90,10 +90,10 @@
 # -----------------------------------------------------------------------------
 - name: "init : Create ibm-entitlement secret in MAS Namespace"
   vars:
-    entitledAuthStr: "{{mas_entitlement_username}}:{{mas_entitlement_key}}"
-    entitledAuth: "{{ entitledAuthStr | b64encode }}"
+    entitled_auth_str: "{{mas_entitlement_username}}:{{mas_entitlement_key}}"
+    entitled_auth: "{{ entitled_auth_str | b64encode }}"
     content:
-      - '{"auths":{"{{mas_icr_cp}}": {"username":"{{mas_entitlement_username}}","password":"{{mas_entitlement_key}}","auth":"{{entitledAuth}}"}'
+      - '{"auths":{"{{mas_icr_cp}}": {"username":"{{mas_entitlement_username}}","password":"{{mas_entitlement_key}}","auth":"{{entitled_auth}}"}'
       - '}'
       - '}'
   community.kubernetes.k8s:

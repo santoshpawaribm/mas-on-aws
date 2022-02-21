@@ -4,10 +4,10 @@
 # 1. Create an image pull secret for local artifactory so that we can install the development catalog
 - name: "Create wiotp-docker-local secret"
   vars:
-    artifactoryAuthStr: "{{artifactory_username}}:{{artifactory_apikey}}"
-    artifactoryAuth: "{{ artifactoryAuthStr | b64encode }}"
+    artifactory_auth_str: "{{artifactory_username}}:{{artifactory_apikey}}"
+    artifactory_auth: "{{ artifactory_auth_str | b64encode }}"
     content:
-      - '{"auths":{"wiotp-docker-local.artifactory.swg-devops.com": {"username":"{{artifactory_username}}","password":"{{artifactory_apikey}}","auth":"{{artifactoryAuth}}"}'
+      - '{"auths":{"wiotp-docker-local.artifactory.swg-devops.com": {"username":"{{artifactory_username}}","password":"{{artifactory_apikey}}","auth":"{{artifactory_auth}}"}'
       - '}'
       - '}'
   community.kubernetes.k8s:
