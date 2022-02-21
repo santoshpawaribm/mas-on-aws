@@ -5,3 +5,4 @@
   ansible.builtin.template:
     src: slscfg.yml.j2
     dest: "{{ mas_config_dir }}/sls.yml"
+    mode: '644'

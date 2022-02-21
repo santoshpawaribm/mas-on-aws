@@ -16,3 +16,4 @@
   ansible.builtin.template:
     src: suite_jdbccfg.yml
     dest: "{{ mas_config_dir }}/jdbc-{{ db2wh_instance_id | lower }}-{{ cpd_meta_namespace }}.yml"
+    mode: '644'

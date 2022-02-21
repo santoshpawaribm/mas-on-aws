@@ -3,12 +3,12 @@
 # 0. Validate required properties
 # -----------------------------------------------------------------------------
 - name: "Fail if ibmcloud_apikey is not provided"
-  when: ibmcloud_apikey is not defined or ibmcloud_apikey == ""
+  when: ibmcloud_apikey is not defined or ibmcloud_apikey|length == 0
   fail:
     msg: "ibmcloud_apikey property is required"
 
 - name: "Fail if cis_crn is not provided"
-  when: cis_crn is not defined or cis_crn == ""
+  when: cis_crn is not defined or cis_crn|length == 0
   fail:
     msg: "cis_crn property is required"
 

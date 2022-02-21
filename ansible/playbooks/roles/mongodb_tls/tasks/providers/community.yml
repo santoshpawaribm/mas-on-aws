@@ -3,22 +3,22 @@
 # 0. Validate required properties
 # -----------------------------------------------------------------------------
 - name: "mongodb/community : Fail if mongodb_storage_class is not provided"
-  when: mongodb_storage_class is not defined or mongodb_storage_class == ""
+  when: mongodb_storage_class is not defined or mongodb_storage_class|length == 0
   fail:
     msg: "mongodb_storage_class property is required"
 
 - name: "mongodb/community : Fail if mongodb_storage_capacity_data is not provided"
-  when: mongodb_storage_capacity_data is not defined or mongodb_storage_capacity_data == ""
+  when: mongodb_storage_capacity_data is not defined or mongodb_storage_capacity_data|length == 0
   fail:
     msg: "mongodb_storage_capacity_data property is required"
 
 - name: "mongodb/community : Fail if mongodb_storage_capacity_logs is not provided"
-  when: mongodb_storage_capacity_logs is not defined or mongodb_storage_capacity_logs == ""
+  when: mongodb_storage_capacity_logs is not defined or mongodb_storage_capacity_logs|length == 0
   fail:
     msg: "mongodb_storage_capacity_logs property is required"
 
 - name: "mongodb/community : Fail if mas_instance_id is not provided"
-  when: mas_instance_id is not defined or mas_instance_id == ""
+  when: mas_instance_id is not defined or mas_instance_id|length == 0
   fail:
     msg: "mas_instance_id property is required"
 
@@ -255,12 +255,13 @@
 - name: "mongodb/community : Create MAS MongoCfg"
   when:
     - mas_instance_id is defined
-    - mas_instance_id != ""
+    - mas_instance_id|length > 0
     - mas_config_dir is defined
-    - mas_config_dir != ""
+    - mas_config_dir|length > 0
   ansible.builtin.template:
     src: community/suite_mongocfg.yml
     dest: "{{ mas_config_dir }}/mongo-{{ mongodb_namespace }}.yml"
+    mode: '644'
   vars:
     mongodb_ca_pem: "{{ mongodb_ca_lookup.resources[0].data['ca.crt'] }}"
     mongodb_server_crt: "{{ mongodb_crt_lookup.resources[0].data['tls.crt'] | b64decode }}"

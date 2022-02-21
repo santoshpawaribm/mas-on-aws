@@ -42,7 +42,7 @@ fi
 terraform destroy -input=false -auto-approve
 log "==== OCP cluster deletion completed ===="
 
-#Delete PrivateHostedZone if it exist
+# Delete PrivateHostedZone if it exist
 hosted_zone_id="$(aws route53 list-hosted-zones --output text --query 'HostedZones[*].[Name,Id]' --output text | grep $CLUSTER_NAME | cut -f2)"
 if [[ -n $hosted_zone_id ]]
 then

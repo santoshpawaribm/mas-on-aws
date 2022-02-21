@@ -3,7 +3,7 @@
 # Fail if no entitlement key is provided
 # -----------------------------------------------------------------------------
 - name: "Fail if cpd_registry_password has not been provided"
-  when: cpd_registry_password is not defined or cpd_registry_password == ""
+  when: cpd_registry_password is not defined or cpd_registry_password|length == 0
   fail:
     msg: "cpd_registry_password property has not been set"
 

@@ -3,12 +3,12 @@
 # 1. Check for required facts
 # -----------------------------------------------------------------------------
 - name: "Fail if bas_password has not been provided"
-  when: bas_password is not defined or bas_password == ""
+  when: bas_password is not defined or bas_password|length == 0
   fail:
     msg: "bas_password property has not been set"
 
 - name: "Fail if grafana_password has not been provided"
-  when: grafana_password is not defined or grafana_password == ""
+  when: grafana_password is not defined or grafana_password|length == 0
   fail:
     msg: "grafana_password property has not been set"
 
