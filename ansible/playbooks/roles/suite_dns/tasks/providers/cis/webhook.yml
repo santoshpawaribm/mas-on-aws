@@ -22,7 +22,7 @@
     - ibmcloud_apikey is defined
     - cis_crn is defined
   community.kubernetes.k8s:
-    namespace: "{{ certManager.namespace }}"
+    namespace: "{{ cert_manager.namespace }}"
     state: present
     definition: "{{ lookup('template', item) }}"
   with_items:

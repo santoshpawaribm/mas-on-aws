@@ -65,10 +65,10 @@
 # -----------------------------------------------------------------------------
 - name: "Create ibm-entitlement secret in SLS Namespace"
   vars:
-    entitledAuthStr: "{{sls_entitlement_username}}:{{sls_entitlement_key}}"
-    entitledAuth: "{{ entitledAuthStr | b64encode }}"
+    entitled_auth_str: "{{sls_entitlement_username}}:{{sls_entitlement_key}}"
+    entitled_auth: "{{ entitled_auth_str | b64encode }}"
     content:
-      - '{"auths":{"{{sls_icr_cp}}": {"username":"{{sls_entitlement_username}}","password":"{{sls_entitlement_key}}","auth":"{{entitledAuth}}"}'
+      - '{"auths":{"{{sls_icr_cp}}": {"username":"{{sls_entitlement_username}}","password":"{{sls_entitlement_key}}","auth":"{{entitled_auth}}"}'
       - '}'
       - '}'
   community.kubernetes.k8s:
