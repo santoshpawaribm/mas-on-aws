@@ -114,7 +114,7 @@
 - name: Save KafkaCfg to filesytem
   when:
     - mas_instance_id is defined
-    - mas_instance_idv|length > 0
+    - mas_instance_id|length > 0
     - mas_config_dir is defined
     - mas_config_dir|length > 0
   ansible.builtin.template:
