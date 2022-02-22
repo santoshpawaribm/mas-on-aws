@@ -2,7 +2,7 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: cis-proxy-route
-  namespace: "{{ certManager.namespace }}"
+  namespace: "{{ cert_manager.namespace }}"
 spec:
   host: "{{ custom_ocp_ingress }}"
   to:

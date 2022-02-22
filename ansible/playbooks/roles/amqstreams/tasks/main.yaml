@@ -2,12 +2,12 @@
 # 1. Check for undefined properties that do not have a default
 # -----------------------------------------------------------------------------
 - name: "Fail if mas_instance_id is not provided"
-  when: mas_instance_id is not defined or mas_instance_id == ""
+  when: mas_instance_id is not defined or mas_instance_id|length == 0
   fail:
     msg: "mas_instance_id property is required"
 
 - name: "Fail if kafka_storage_class is not provided"
-  when: kafka_storage_class is not defined or kafka_storage_class == ""
+  when: kafka_storage_class is not defined or kafka_storage_class|length == 0
   fail:
     msg: "kafka_storage_class property is required"
 
@@ -114,9 +114,10 @@
 - name: Save KafkaCfg to filesytem
   when:
     - mas_instance_id is defined
-    - mas_instance_id != ""
+    - mas_instance_id|length > 0
     - mas_config_dir is defined
-    - mas_config_dir != ""
+    - mas_config_dir|length > 0
   ansible.builtin.template:
     src: kafkacfg.yml.j2
     dest: "{{ mas_config_dir }}/kafka-{{ kafka_cluster_name }}-{{ kafka_namespace }}.yml"
+    mode: '644'

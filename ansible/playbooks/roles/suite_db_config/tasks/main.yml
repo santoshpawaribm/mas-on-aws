@@ -3,32 +3,32 @@
 # 1. Check for undefined properties that do not have a default
 # -----------------------------------------------------------------------------
 - name: "Fail if mas_instance_id is not provided"
-  when: mas_instance_id is not defined or mas_instance_id == ""
+  when: mas_instance_id is not defined or mas_instance_id|length == 0
   fail:
     msg: "mas_instance_id property is required"
 
 - name: "Fail if mas_workspace_id is not provided"
-  when: mas_workspace_id is not defined or mas_workspace_id == ""
+  when: mas_workspace_id is not defined or mas_workspace_id|length == 0
   fail:
     msg: "mas_workspace_id property is required"
 
 - name: "Fail if db_username is not provided"
-  when: db_username is not defined or db_username == ""
+  when: db_username is not defined or db_username|length == 0
   fail:
     msg: "db_username property is required"
 
 - name: "Fail if jdbc_instance_password is not provided"
-  when: jdbc_instance_password is not defined or jdbc_instance_password == ""
+  when: jdbc_instance_password is not defined or jdbc_instance_password|length == 0
   fail:
     msg: "jdbc_instance_password property is required"
 
 - name: "Fail if jdbc_url is not provided"
-  when: jdbc_url is not defined or jdbc_url == ""
+  when: jdbc_url is not defined or jdbc_url|length == 0
   fail:
     msg: "jdbc_url property is required"
 
 - name: "Fail if db_pem_file is not provided"
-  when: db_pem_file is not defined or db_pem_file == ""
+  when: db_pem_file is not defined or db_pem_file|length == 0
   fail:
     msg: "db_pem_file property is required"
 

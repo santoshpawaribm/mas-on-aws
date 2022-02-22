@@ -22,10 +22,10 @@ spec:
           args:
             - --tls-cert-file=/tls/tls.crt
             - --tls-private-key-file=/tls/tls.key
-            - --v={{ logLevel }}
+            - --v={{ log_level }}
           env:
             - name: GROUP_NAME
-              value: "{{ groupName }}"
+              value: "{{ group_name }}"
           ports:
             - name: https
               containerPort: 443

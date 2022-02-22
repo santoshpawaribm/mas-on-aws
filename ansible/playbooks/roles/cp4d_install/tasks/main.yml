@@ -3,7 +3,7 @@
 # Fail if no entitlement key is provided
 # -----------------------------------------------------------------------------
 - name: "Fail if cpd_registry_password has not been provided"
-  when: cpd_registry_password is not defined or cpd_registry_password == ""
+  when: cpd_registry_password is not defined or cpd_registry_password|length == 0
   fail:
     msg: "cpd_registry_password property has not been set"
 
@@ -31,10 +31,10 @@
 # -----------------------------------------------------------------------------
 - name: "Create ibm-entitlement-key secret"
   vars:
-    entitledAuthStr: "{{cpd_registry_user}}:{{cpd_registry_password}}"
-    entitledAuth: "{{ entitledAuthStr | b64encode }}"
+    entitled_auth_str: "{{cpd_registry_user}}:{{cpd_registry_password}}"
+    entitled_auth: "{{ entitled_auth_str | b64encode }}"
     content:
-      - "{\"auths\":{\"{{cpd_registry}}\":{\"username\":\"{{cpd_registry_user}}\",\"password\":\"{{cpd_registry_password}}\",\"auth\":\"{{entitledAuth}}\"}"
+      - "{\"auths\":{\"{{cpd_registry}}\":{\"username\":\"{{cpd_registry_user}}\",\"password\":\"{{cpd_registry_password}}\",\"auth\":\"{{entitled_auth}}\"}"
       - "}"
       - "}"
   community.kubernetes.k8s:

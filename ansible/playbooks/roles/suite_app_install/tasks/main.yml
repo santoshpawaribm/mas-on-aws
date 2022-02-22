@@ -3,12 +3,12 @@
 # 1. Check for undefined properties that do not have a default
 # -----------------------------------------------------------------------------
 - name: "Fail if mas_instance_id is not provided"
-  when: mas_instance_id is not defined or mas_instance_id == ""
+  when: mas_instance_id is not defined or mas_instance_id|length == 0
   fail:
     msg: "mas_instance_id property is required"
 
 - name: "Fail if mas_app_id is not provided"
-  when: mas_app_id is not defined or mas_app_id == ""
+  when: mas_app_id is not defined or mas_app_id|length == 0
   fail:
     msg: "mas_app_id property is required"
 
@@ -71,10 +71,10 @@
 # -----------------------------------------------------------------------------
 - name: "Create ibm-entitlement secret in application Namespace"
   vars:
-    entitledAuthStr: "{{mas_entitlement_username}}:{{mas_entitlement_key}}"
-    entitledAuth: "{{ entitledAuthStr | b64encode }}"
+    entitled_auth_str: "{{mas_entitlement_username}}:{{mas_entitlement_key}}"
+    entitled_auth: "{{ entitled_auth_str | b64encode }}"
     content:
-      - '{"auths":{"{{mas_icr_cp}}": {"username":"{{mas_entitlement_username}}","password":"{{mas_entitlement_key}}","auth":"{{entitledAuth}}"}'
+      - '{"auths":{"{{mas_icr_cp}}": {"username":"{{mas_entitlement_username}}","password":"{{mas_entitlement_key}}","auth":"{{entitled_auth}}"}'
       - '}'
       - '}'
   community.kubernetes.k8s:

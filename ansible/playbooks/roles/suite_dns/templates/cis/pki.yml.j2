@@ -5,7 +5,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: "cert-manager-webhook-ibm-cis-self-signed-issuer"
-  namespace: "{{ certManager.namespace }}"
+  namespace: "{{ cert_manager.namespace }}"
   labels:
     app: "cert-manager-webhook-ibm-cis"
 spec:
@@ -18,7 +18,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: "cert-manager-webhook-ibm-cis-root-ca-certificate"
-  namespace: "{{ certManager.namespace }}"
+  namespace: "{{ cert_manager.namespace }}"
   labels:
     app: "cert-manager-webhook-ibm-cis"
 spec:
@@ -36,7 +36,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: "cert-manager-webhook-ibm-cis-root-ca-issuer"
-  namespace: "{{ certManager.namespace }}"
+  namespace: "{{ cert_manager.namespace }}"
   labels:
     app: "cert-manager-webhook-ibm-cis"
 spec:
@@ -50,7 +50,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: "cert-manager-webhook-ibm-cis-serving-cert"
-  namespace: "{{ certManager.namespace }}"
+  namespace: "{{ cert_manager.namespace }}"
   labels:
     app: "cert-manager-webhook-ibm-cis.name"
 spec:
@@ -60,5 +60,5 @@ spec:
     name: "cert-manager-webhook-ibm-cis-root-ca-issuer"
   dnsNames:
   - "cert-manager-webhook-ibm-cis"
-  - "cert-manager-webhook-ibm-cis.{{ certManager.namespace }}"
-  - "cert-manager-webhook-ibm-cis.{{ certManager.namespace }}.svc"
+  - "cert-manager-webhook-ibm-cis.{{ cert_manager.namespace }}"
+  - "cert-manager-webhook-ibm-cis.{{ cert_manager.namespace }}.svc"

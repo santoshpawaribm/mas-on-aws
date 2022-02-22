@@ -11,7 +11,7 @@
 
 
 - name: "Fail if type is not provided"
-  when: cluster_type is not defined or cluster_type == ""
+  when: cluster_type is not defined or cluster_type|length == 0
   fail:
     msg: "cluster_type property is required"
 

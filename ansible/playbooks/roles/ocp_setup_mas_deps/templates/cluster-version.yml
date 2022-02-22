@@ -6,5 +6,5 @@ metadata:
   labels:
     razee/watch-resource: detail
 spec:
-  clusterID: {{ clusterID }}
+  clusterID: {{ cluster_id }}
   channel: null

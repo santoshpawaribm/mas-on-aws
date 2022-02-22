@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# This script will initiate the undeployment process of MAS. It will perform following steps,
+# This script will initiate the undeployment process of MAS.
 
 # Variables
 SCRIPT_RELATIVE_DIR=$(dirname "${BASH_SOURCE[0]}")
@@ -33,10 +33,16 @@ log "==== Bastion host deletion completed ===="
 log "==== OCP cluster deletion started ===="
 # Undeploy OCP cluster
 cd $GIT_REPO_HOME/aws/ocp-terraform
+# Copy the OCP pull secret to correct place
+mkdir -p /root/mas-on-aws
+if [[ ! -f /root/mas-on-aws/pull-secret.json ]]; then
+  cp $GIT_REPO_HOME/pull-secret.json /root/mas-on-aws/
+  log "Copied OCP pull secret file to right place"
+fi
 terraform destroy -input=false -auto-approve
 log "==== OCP cluster deletion completed ===="
 
-#Delete PrivateHostedZone if it exist
+# Delete PrivateHostedZone if it exist
 hosted_zone_id="$(aws route53 list-hosted-zones --output text --query 'HostedZones[*].[Name,Id]' --output text | grep $CLUSTER_NAME | cut -f2)"
 if [[ -n $hosted_zone_id ]]
 then

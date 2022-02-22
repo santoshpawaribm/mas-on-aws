@@ -3,12 +3,12 @@
 # 1. Check for missing properties that do not have defaults
 # -----------------------------------------------------------------------------
 - name: "Fail if sls_entitlement_username has not been provided"
-  when: sls_entitlement_username is not defined or sls_entitlement_username == ""
+  when: sls_entitlement_username is not defined or sls_entitlement_username|length == 0
   fail:
     msg: "sls_entitlement_username property has not been set"
 
 - name: "Fail if sls_entitlement_key has not been provided"
-  when: sls_entitlement_key is not defined or sls_entitlement_key == ""
+  when: sls_entitlement_key is not defined or sls_entitlement_key|length == 0
   fail:
     msg: "sls_entitlement_key property has not been set"
 
@@ -65,10 +65,10 @@
 # -----------------------------------------------------------------------------
 - name: "Create ibm-entitlement secret in SLS Namespace"
   vars:
-    entitledAuthStr: "{{sls_entitlement_username}}:{{sls_entitlement_key}}"
-    entitledAuth: "{{ entitledAuthStr | b64encode }}"
+    entitled_auth_str: "{{sls_entitlement_username}}:{{sls_entitlement_key}}"
+    entitled_auth: "{{ entitled_auth_str | b64encode }}"
     content:
-      - '{"auths":{"{{sls_icr_cp}}": {"username":"{{sls_entitlement_username}}","password":"{{sls_entitlement_key}}","auth":"{{entitledAuth}}"}'
+      - '{"auths":{"{{sls_icr_cp}}": {"username":"{{sls_entitlement_username}}","password":"{{sls_entitlement_key}}","auth":"{{entitled_auth}}"}'
       - '}'
       - '}'
   community.kubernetes.k8s:
@@ -169,9 +169,9 @@
 - include_tasks: tasks/slscfg.yml
   when:
     - mas_instance_id is defined
-    - mas_instance_id != ""
+    - mas_instance_id|length > 0
     - mas_config_dir is defined
-    - mas_config_dir != ""
+    - mas_config_dir|length > 0
 
 # 10. Create Cloud CredentialsRequest in SLS namespace
 
