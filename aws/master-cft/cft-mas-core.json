@@ -29,7 +29,7 @@
                 "large"
             ]
         },
-        "OpenshiftClusterApiUrl": {
+        "OpenShiftClusterApiUrl": {
             "Description": "Existing OCP cluster URL in the format https://api.[clustername].[domain]. Do not specify port number, 6443 will be used. e.g. https://api.masocp-joalae.mas4aws.com. (Applicable only if existing OCP cluster is provided)",
             "Type": "String"
         },
@@ -129,7 +129,7 @@
                     "Parameters": [
                         "PublicHostedZone",
                         "ClusterSize",
-                        "OpenshiftClusterApiUrl",
+                        "OpenShiftClusterApiUrl",
                         "OpenShiftUser",
                         "OpenShiftPassword"
                     ]
@@ -247,7 +247,7 @@
         "ShowOCPDetailsInOutput": {
             "Fn::Equals": [
                 {
-                    "Ref": "OpenshiftClusterApiUrl"
+                    "Ref": "OpenShiftClusterApiUrl"
                 },
                 ""
             ]
@@ -817,7 +817,7 @@
                                 },
                                 "' '",
                                 {
-                                    "Ref": "OpenshiftClusterApiUrl"
+                                    "Ref": "OpenShiftClusterApiUrl"
                                 },
                                 "' '",
                                 {
