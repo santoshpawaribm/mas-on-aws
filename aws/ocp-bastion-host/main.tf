@@ -24,8 +24,15 @@ resource "aws_security_group" "masocp-bastion-host-sg" {
   }
 }
 
+data "aws_instance" "bootnode_details"{
+filter {
+  name = "tag:Name"
+  values =["masocp-${var.unique_str}-bootnode"]
+  }
+}
+
 resource "aws_instance" "masocp-bastion-host" {
-  ami = var.ami
+  ami = data.aws_instance.bootnode_details.ami
   instance_type = "t3.micro"
   associate_public_ip_address = true
   subnet_id = var.subnet_id

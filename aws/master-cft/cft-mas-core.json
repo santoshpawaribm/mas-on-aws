@@ -3,24 +3,24 @@
     "Description": "Template to create Bootnode used for deploying MAS on OpenShift",
     "Parameters": {
         "OfferingType": {
-            "Description": "Type of MAS offering.",
+            "Description": "Select your preferred Suite offering type.",
             "Type": "String",
-            "Default": "MAS Core + CP4D",
+            "Default": "MAS Core + Cloud Pak for Data (CP4D)",
             "AllowedValues": [
-                "MAS Core + CP4D",
-                "MAS Core + Manage (no CP4D)"
+                "MAS Core + Cloud Pak for Data (CP4D)",
+                "MAS Core + Manage (no Cloud Pak for Data)"
             ]
         },
         "PublicHostedZone": {
-            "Description": "Public hosted zone to use. e.g. mas4aws.myorg.com (Applicable only if new OCP cluster is being created)",
+            "Description": "Select the public hosted zone that you created in the AWS Route 53 service, for example: mas4aws.myorg.com",
             "Type": "AWS::Route53::HostedZone::Id"
         },
         "BootnodeSGIngressCidrIp": {
-            "Description": "Please set CIDR to x.x.x.x/32 to allow one specific IP address access, 0.0.0.0/0 to allow all IP addresses access, or another CIDR range to access Bootnode over SSH.",
+            "Description": "Use CIDR notation to enter the IP addresses that can access the bootnode. For example, 192.12.33.3/32. To allow access from all IP addresses, enter 0.0.0.0/0.",
             "Type": "String"
         },
         "ClusterSize": {
-            "Description": "OCP cluster size. (small-3M,3W,3S medium-3M,5W,3S large-5M,7W,3S) (M-m5.2xlarge W-m5.4xlarge S-m5.4xlarge). (Applicable only if new OCP cluster is being created)",
+            "Description": "Select your preferred cluster size. All master nodes are m5.2xlarge Amazon EC2 instances. All worker nodes are m5.4xlarge instances.",
             "Type": "String",
             "Default": "small",
             "AllowedValues": [
@@ -29,52 +29,52 @@
                 "large"
             ]
         },
-        "OpenshiftClusterApiUrl": {
-            "Description": "Existing OCP cluster URL in the format https://api.[clustername].[domain]. Do not specify port number, 6443 will be used. e.g. https://api.masocp-joalae.mas4aws.com. (Applicable only if existing OCP cluster is provided)",
+        "OpenShiftClusterApiUrl": {
+            "Description": "Enter the cluster's URL in the format https://api.<cluster_name>.<domain_name>. Do not specify the port number. For example,https://api.masocp.joalae.mas4aws.com",
             "Type": "String"
         },
         "OpenShiftUser": {
-            "Description": "Username to access existing OCP cluster. (Applicable only if existing OCP cluster is provided)",
+            "Description": "Enter the username of the existing cluster account.",
             "Type": "String"
         },
         "OpenShiftPassword": {
-            "Description": "Password to access existing OCP cluster. (Applicable only if existing OCP cluster is provided)",
+            "Description": "Enter the password of the existing cluster account.",
             "Type": "String",
             "NoEcho": true
         },
         "EntitledRegistryKey": {
-            "Description": "Entitled registry key.",
+            "Description": "Enter the registry key that you downloaded from the IBM Container Library.",
             "Type": "String",
             "NoEcho": true
         },
         "OpenShiftPullSecret": {
-            "Description": "OpenShift Pull secret to download operator images. JSON string can be pasted as is.",
+            "Description": "Enter the JSON text from the pull secret file that you downloaded from the Red Hat Hybrid Cloud Console.",
             "Type": "String",
             "NoEcho": true
         },
         "MASLicenseUrl": {
-            "Description": "HTTP or S3 URL of MAS license file. e.g. s3://masocp-license/entitlement.lic (Applicable only for BYOL product)",
+            "Description": "Enter the HTTP or S3 location of your Suite license key file, for example: s3://masocp-license/entitlement.lic",
             "Type": "String"
         },
         "MASManageDBUser": {
-            "Description": "User name for the database to be configured with MAS Manage app. (Applicable only if OfferingType is 'MAS Core + Manage') e.g. db2inst1",
+            "Description": "Enter the username that the Maximo Manage application uses to connect to the database.",
             "Type": "String"
         },
         "MASManageDBPassword": {
-            "Description": "Password for the database to be configured with MAS Manage app. (Applicable only if OfferingType is 'MAS Core + Manage')",
+            "Description": "Enter the password that the Maximo Manage application uses to connect to the database.",
             "Type": "String",
             "NoEcho": true
         },
         "MASManageDBJdbcUrl": {
-            "Description": "JDBC URL for the database to be configured with MAS Manage app. (Applicable only if OfferingType is 'MAS Core + Manage') e.g. jdbc:db2://1.2.3.4:50051/FTMDB:sslConnection=true;",
+            "Description": "Enter the URL location of the database that the Maximo Manage application connects to, for example: jdbc:db2://1.2.3.4/50051",
             "Type": "String"
         },
         "MASManageDBCertificateUrl": {
-            "Description": "HTTP or S3 URL of database public certificate file. (Applicable only if OfferingType is 'MAS Core + Manage') e.g. s3://masocp-license/db-certificate.crt",
+            "Description": "Enter the HTTP or S3 location of the database's public certificate, for example: s3://masocp-license/db-certificate.crt",
             "Type": "String"
         },
         "ImportDemoData": {
-            "Description": "Whether or not to import demo data in the MAS database.",
+            "Description": "Indicate whether you want to import demo data into the database. This might be useful for development or test environments.",
             "Default": false,
             "Type": "String",
             "AllowedValues": [
@@ -84,30 +84,30 @@
         },
         "SSHKey": {
             "Type": "AWS::EC2::KeyPair::KeyName",
-            "Description": "This SSH key will be added to the OCP cluster nodes, Bootnode and Bastion host."
+            "Description": "Select the public SSH key that you uploaded to the Amazon EC2 service."
         },
         "SLSEndpointUrl": {
-            "Description": "SLS endpoint URL. Must be accessible to the deployment. It can be retrieved from the OCP route named 'sls-*' in the namespace where SLS is deployed.",
+            "Description": "Enter the endpoint URL that you retrieved from the 'sls-*' OpenShift route in the cluster namespace where SLS is installed.",
             "Type": "String"
         },
         "SLSRegistrationKey": {
-            "Description": "SLS registration key, normally available as a key 'status.registrationKey' in 'License Service' instance YAML in the SLS deployed namespace.",
+            "Description": "Enter the 'status.registrationKey' value that you retrieved from the LicenseService YAML file in the SLS namespace.",
             "Type": "String"
         },
         "SLSPublicCertificateUrl": {
-            "Description": "HTTP or S3 URL of SLS public certificate file. It can be retrieved from the OCP secret named 'mas-*-sls-cfg' data 'ca.crt' in the namespace where MAS core is deployed.",
+            "Description": "Enter the HTTP or S3 location of the service's public certificate that you retrieved from the 'ca.crt' file in the 'mas-*-sls-cfg' route in the MAS core namespace.",
             "Type": "String"
         },
         "BASEndpointUrl": {
-            "Description": "BAS endpoint URL. Must be accessible to the deployment. It can be retrieved from the OCP route named 'bas-endpoint' in the namespace where BAS is deployed.",
+            "Description": "Enter the endpoint URL that you retrieved from the 'bas-endpoint' OpenShift route in the cluster namespace where BAS is installed.",
             "Type": "String"
         },
         "BASAPIKey": {
-            "Description": "BAS API key, normally available in OCP secret 'bas-api-key' in the BAS deployed namespace.",
+            "Description": "Enter the service's API key that you retrieved from the 'bas-api-key' secret in the BAS  namespace.",
             "Type": "String"
         },
         "BASPublicCertificateUrl": {
-            "Description": "HTTP or S3 URL of BAS public certificate file. It can be retrieved from the OCP secret named 'mas-*-bas-cfg' data 'ca-bundle.pem' in the namespace where MAS core is deployed.",
+            "Description": "Enter the HTTP or S3 location of the service's public certificate that you retrieved from the 'ca.crt' file in the 'mas-*-bas-cfg' route in the MAS core namespace.",
             "Type": "String"
         }
     },
@@ -129,7 +129,7 @@
                     "Parameters": [
                         "PublicHostedZone",
                         "ClusterSize",
-                        "OpenshiftClusterApiUrl",
+                        "OpenShiftClusterApiUrl",
                         "OpenShiftUser",
                         "OpenShiftPassword"
                     ]
@@ -247,7 +247,7 @@
         "ShowOCPDetailsInOutput": {
             "Fn::Equals": [
                 {
-                    "Ref": "OpenshiftClusterApiUrl"
+                    "Ref": "OpenShiftClusterApiUrl"
                 },
                 ""
             ]
@@ -817,7 +817,7 @@
                                 },
                                 "' '",
                                 {
-                                    "Ref": "OpenshiftClusterApiUrl"
+                                    "Ref": "OpenShiftClusterApiUrl"
                                 },
                                 "' '",
                                 {

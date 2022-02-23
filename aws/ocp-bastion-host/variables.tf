@@ -4,11 +4,6 @@ variable "region" {
   default     = "<REGION>"
 }
 
-variable "ami" {
-  type        = string
-  description = "AMI"
-}
-
 variable "vpc_id" {
   type        = string
   description = "VPC Id"

@@ -68,7 +68,7 @@ else
         log " MAS_JDBC_CERT_LOCAL_FILE=$MAS_JDBC_CERT_LOCAL_FILE"
         fi
         export MAS_DB2_JAR_LOCAL_PATH=$GIT_REPO_HOME/lib/db2jcc4.jar
-        if  [[ $OFFERING_TYPE == "MAS Core + Manage (no CP4D)" ]]; then  
+        if  [[ $OFFERING_TYPE == "MAS Core + Manage (no Cloud Pak for Data)" ]]; then  
         if [[ ${MAS_JDBC_URL,, } =~ ^jdbc:db2? ]]; then
             log  "Connecting to the Database"
             if python jdbc-prevalidate.py;  then 
