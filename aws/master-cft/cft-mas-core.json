@@ -5,10 +5,10 @@
         "OfferingType": {
             "Description": "Type of MAS offering.",
             "Type": "String",
-            "Default": "MAS Core + CP4D",
+            "Default": "MAS Core + Cloud Pak for Data (CP4D)",
             "AllowedValues": [
-                "MAS Core + CP4D",
-                "MAS Core + Manage (no CP4D)"
+                "MAS Core + Cloud Pak for Data (CP4D)",
+                "MAS Core + Manage (no Cloud Pak for Data)"
             ]
         },
         "PublicHostedZone": {
