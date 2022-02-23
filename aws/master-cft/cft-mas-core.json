@@ -20,7 +20,7 @@
             "Type": "String"
         },
         "ClusterSize": {
-            "Description": "Select your preferred cluster size. All master nodes are m5.2xlarge Amazon EC2 instances. All worker nodes are m5.4xlarge instances.",
+            "Description": "Select your preferred cluster size. All master nodes (M) are m5.2xlarge Amazon EC2 instances. All worker nodes (W) are m5.4xlarge instances. Choose from: small (3M, 3W, total memory: 288GB), medium (3M, 3W, total memory: 416GB), or large (5M, 7W, total memory: 608GB).",
             "Type": "String",
             "Default": "small",
             "AllowedValues": [
@@ -116,7 +116,7 @@
             "ParameterGroups": [
                 {
                     "Label": {
-                        "default": "MAS Offering"
+                        "default": "Maximo Application Suite offering type"
                     },
                     "Parameters": [
                         "OfferingType"
@@ -124,7 +124,7 @@
                 },
                 {
                     "Label": {
-                        "default": "OpenShift Cluster"
+                        "default": "OpenShift cluster configuration (complete only if you want to create a new cluster)"
                     },
                     "Parameters": [
                         "PublicHostedZone",
@@ -136,7 +136,7 @@
                 },
                 {
                     "Label": {
-                        "default": "Bootnode Connection"
+                        "default": "Cluster and bootnode access"
                     },
                     "Parameters": [
                         "SSHKey",
@@ -145,7 +145,7 @@
                 },
                 {
                     "Label": {
-                        "default": "Keys and Licenses"
+                        "default": "Keys and licenses"
                     },
                     "Parameters": [
                         "EntitledRegistryKey",
@@ -155,7 +155,7 @@
                 },
                 {
                     "Label": {
-                        "default": "MAS Manage JDBC Config (Applicable only if OfferingType is 'MAS Core + Manage', if kept empty database configuration will be skipped)"
+                        "default": "Maximo Manage database configuration (complete only for the 'MAS + Manage' offering type)"
                     },
                     "Parameters": [
                         "MASManageDBUser",
@@ -167,7 +167,7 @@
                 },
                 {
                     "Label": {
-                        "default": "Existing SLS Details (if kept empty a new SLS instance will be deployed)"
+                        "default": "Existing Suite License Service connection details (leave empty to create a new BAS instance)"
                     },
                     "Parameters": [
                         "SLSEndpointUrl",
@@ -177,7 +177,7 @@
                 },
                 {
                     "Label": {
-                        "default": "Existing BAS Details (if kept empty a new BAS instance will be deployed)"
+                        "default": "Existing Behavior Analytics Service connection details (leave empty to create a new BAS instance)"
                     },
                     "Parameters": [
                         "BASEndpointUrl",
