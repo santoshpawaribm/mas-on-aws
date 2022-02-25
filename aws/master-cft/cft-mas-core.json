@@ -5,9 +5,9 @@
         "OfferingType": {
             "Description": "Select your preferred Suite offering type.",
             "Type": "String",
-            "Default": "MAS Core + Cloud Pak for Data (CP4D)",
+            "Default": "MAS Core + Cloud Pak for Data",
             "AllowedValues": [
-                "MAS Core + Cloud Pak for Data (CP4D)",
+                "MAS Core + Cloud Pak for Data",
                 "MAS Core + Manage (no Cloud Pak for Data)"
             ]
         },
@@ -66,7 +66,7 @@
             "NoEcho": true
         },
         "MASManageDBJdbcUrl": {
-            "Description": "Enter the URL location of the database that the Maximo Manage application connects to, for example: jdbc:db2://1.2.3.4/50051",
+            "Description": "Enter the URL location of the database that the Maximo Manage application connects to, for example: jdbc:db2://1.2.3.4:50051/FTMDB:sslConnection=true",
             "Type": "String"
         },
         "MASManageDBCertificateUrl": {
@@ -167,7 +167,7 @@
                 },
                 {
                     "Label": {
-                        "default": "Existing Suite License Service connection details (leave empty to create a new BAS instance)"
+                        "default": "Existing Suite License Service connection details (leave empty to create a new SLS instance)"
                     },
                     "Parameters": [
                         "SLSEndpointUrl",
