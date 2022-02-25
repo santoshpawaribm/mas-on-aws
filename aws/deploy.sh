@@ -18,6 +18,8 @@ IAM_USER_NAME="masocp-user-${RANDOM_STR}"
 export SLS_STORAGE_CLASS=gp2
 # BAS variables 
 export BAS_META_STORAGE=gp2
+# CP4D variables
+export CPD_BLOCK_STORAGE_CLASS=gp2
 
 # Retrieve SSH public key
 TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
@@ -153,6 +155,16 @@ EOT
   set -e
   log "==== OCP cluster creation completed ===="
 
+## Add ER Key to global pull secret
+  cd /tmp
+  oc extract secret/pull-secret -n openshift-config --keys=.dockerconfigjson --to=. --confirm
+  export encodedEntitlementKey=$(echo cp:$SLS_ENTITLEMENT_KEY | tr -d '\n' | base64 -w0)
+  ##export encodedEntitlementKey=$(echo cp:$SLS_ENTITLEMENT_KEY | base64 -w0)
+  export emailAddress=$(cat .dockerconfigjson | jq -r '.auths["cloud.openshift.com"].email')
+  jq '.auths |= . + {"cp.icr.io": { "auth" : "$encodedEntitlementKey", "email" : "$emailAddress"}}' .dockerconfigjson > /tmp/dockerconfig.json
+  envsubst < /tmp/dockerconfig.json > /tmp/.dockerconfigjson
+  oc set data secret/pull-secret -n openshift-config --from-file=/tmp/.dockerconfigjson
+
   ## Create bastion host
   cd $GIT_REPO_HOME/aws
   set +e
@@ -253,11 +265,11 @@ else
 fi
 
 # Deploy CP4D
-log "==== CP4D deployment started ===="
 if [[ $DEPLOY_CP4D == "true" ]]; then
+  log "==== CP4D deployment started ===="
   ansible-playbook install-cp4d.yml
+  log "==== CP4D deployment completed ===="
 fi
-log "==== CP4D deployment completed ===="
 
 ## Deploy MAS
 log "==== MAS deployment started ===="
