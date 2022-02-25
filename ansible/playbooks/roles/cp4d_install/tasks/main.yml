@@ -31,10 +31,10 @@
 # -----------------------------------------------------------------------------
 - name: "Create ibm-entitlement-key secret"
   vars:
-    entitled_auth_str: "{{cpd_registry_user}}:{{cpd_registry_password}}"
-    entitled_auth: "{{ entitled_auth_str | b64encode }}"
+    entitledAuthStr: "{{cpd_registry_user}}:{{cpd_registry_password}}"
+    entitledAuth: "{{ entitledAuthStr | b64encode }}"
     content:
-      - "{\"auths\":{\"{{cpd_registry}}\":{\"username\":\"{{cpd_registry_user}}\",\"password\":\"{{cpd_registry_password}}\",\"auth\":\"{{entitled_auth}}\"}"
+      - "{\"auths\":{\"{{cpd_registry}}\":{\"username\":\"{{cpd_registry_user}}\",\"password\":\"{{cpd_registry_password}}\",\"auth\":\"{{entitledAuth}}\"}"
       - "}"
       - "}"
   community.kubernetes.k8s:
