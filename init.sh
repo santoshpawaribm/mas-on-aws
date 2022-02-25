@@ -92,6 +92,7 @@ export BAS_CONTACT_FIRSTNAME=Bas
 export BAS_CONTACT_LASTNAME=Support
 export GRAPHANA_PASSWORD=password
 # MAS variables
+#export MAS_ENTITLEMENT_KEY=$SLS_ENTITLEMENT_KEY
 # CP4D variables
 export CPD_STORAGE_CLASS=ocs-storagecluster-cephfs
 export CPD_NAMESPACE="cpd-meta-ops-${RANDOM_STR}"
