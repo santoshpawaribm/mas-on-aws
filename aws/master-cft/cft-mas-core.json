@@ -66,7 +66,7 @@
             "NoEcho": true
         },
         "MASManageDBJdbcUrl": {
-            "Description": "Enter the URL location of the database that the Maximo Manage application connects to, for example: jdbc:db2://1.2.3.4:50051/FTMDB:sslConnection=true",
+            "Description": "Enter the URL location of the database that the Maximo Manage application connects to, for example: jdbc:db2://1.2.3.4:50051/FTMDB:sslConnection=true;",
             "Type": "String"
         },
         "MASManageDBCertificateUrl": {
