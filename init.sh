@@ -49,7 +49,7 @@ if [[ (-z $CLOUD_TYPE) || (-z $DEPLOY_REGION) || (-z $ACCOUNT_ID) || (-z $CLUSTE
   PRE_VALIDATION=fail
 fi
 
-if [[ $OFFERING_TYPE == "MAS Core + Cloud Pak for Data (CP4D)" ]]; then
+if [[ $OFFERING_TYPE == "MAS Core + Cloud Pak for Data" ]]; then
   export DEPLOY_CP4D="true"
   export DEPLOY_MANAGE="false"
 elif [[ $OFFERING_TYPE == "MAS Core + Manage (no Cloud Pak for Data)" ]]; then
